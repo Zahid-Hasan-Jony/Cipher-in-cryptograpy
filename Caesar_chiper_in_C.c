@@ -1,21 +1,23 @@
 #include<stdio.h>
+void flush();
  
 int main()
 {
    int b;
-   Printf("Enter 1 for Encryption\n Enter 2 for Decryption\n");
+   Printf("Enter 1 for Encryption\nEnter 2 for Decryption\n");
    scanf("%d",&b);
    if (b==1) Encrypt();
    else if (b==2) Decrypt();
    else printf("Enter a proper number");
    return 0;
 }
-char Encrypt(){
+char Decrypt(){
   char meg[200], String;
 	int a, k;
 	
+        flush();
 	printf("Enter Cryptext: ");
-	gets(meg);
+	fgets(meg,200,stdin);
 
 	printf("Enter key: ");
 	scanf("%d", &k);
@@ -43,16 +45,17 @@ char Encrypt(){
 		}
 	}
 	
-	printf("Plaintext: %s", message);
+	printf("Plaintext: %s", meg);
 
   }
 
- char Decrypt(){
+ int Encrypt(){
   char meg[200], String;
 	int a, k;
 	
+        flush();
 	printf("Enter Plaintext: ");
-	gets(meg);
+	fgets(meg,200,stdin);
 
 	printf("Enter key: ");
 	scanf("%d", &k);
@@ -63,7 +66,7 @@ char Encrypt(){
 		if( String>= 'a' && String <= 'z'){
 			String = String + k;
 			
-			if(String < 'a'){
+			if(String > 'z'){
 				String = String - 'z' + 'a' - 1;
 			}
 			
@@ -72,7 +75,7 @@ char Encrypt(){
 		else if(String >= 'A' && String <= 'Z'){
 			String = String + k;
 			
-			if(String < 'A'){
+			if(String >'Z'){
 				String = String - 'Z' + 'A' - 1;
 			}
 			
@@ -80,6 +83,11 @@ char Encrypt(){
 		}
 	}
 	
-	printf("Cryptext: %s", message);
+	printf("Cryptext: %s", meg);
 
   }
+
+ void flush(){
+      int c;
+      while ((c=getchar()) != '\n' && c != EOF);
+    }
